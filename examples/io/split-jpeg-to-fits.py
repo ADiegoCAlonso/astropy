@@ -19,8 +19,11 @@ This example uses `pillow <http://python-pillow.org>`_ to read the image,
 """
 
 import numpy as np
+import os.path
+import requests
 from PIL import Image
 from astropy.io import fits
+from io import BytesIO
 
 ##############################################################################
 # Set up matplotlib and use a nicer set of plot parameters
@@ -32,7 +35,10 @@ plt.style.use(astropy_mpl_style)
 ##############################################################################
 # Load and display the original 3-color jpeg image:
 
-image = Image.open('Hs-2009-14-a-web.jpg')
+IMAGE_PATH = "Hs-2009-14-a-web.jpg"
+IMAGE_URL = 'https://raw.githubusercontent.com/astropy/astropy/master/examples/io/Hs-2009-14-a-web.jpg'
+image = Image.open(IMAGE_PATH if os.path.isfile(IMAGE_PATH) else BytesIO(requests.get(IMAGE_URL).content))
+
 xsize, ysize = image.size
 print("Image size: {} x {}".format(xsize, ysize))
 plt.imshow(image)
