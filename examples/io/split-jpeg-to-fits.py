@@ -35,7 +35,7 @@ plt.style.use(astropy_mpl_style)
 image = Image.open('Hs-2009-14-a-web.jpg')
 xsize, ysize = image.size
 print("Image size: {} x {}".format(xsize, ysize))
-plt.imshow(image)
+ax = plt.imshow(image)
 
 ##############################################################################
 # Split the three channels (RGB) and get the data as Numpy arrays. The arrays
